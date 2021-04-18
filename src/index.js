@@ -7,7 +7,7 @@ const { onSubscribe } = require("./handlers/subscribe");
 const { onUnsubscribe } = require("./handlers/unsubscribe");
 const { onHelp } = require("./handlers/help");
 const { crawl } = require("./crawler");
-const { getRandomIntInclusive } = require("./utils");
+const { getRandomArbitrary } = require("./utils");
 
 const slimbot = new Slimbot(process.env["TELEGRAM_BOT_TOKEN"]);
 const adminId = process.env["TELEGRAM_ADMIN_ID"];
@@ -59,7 +59,7 @@ async function runCrawler() {
 
   setTimeout(async () => {
     runCrawler();
-  }, 1e3 * 60 * getRandomIntInclusive(2, 6));
+  }, 1e3 * 60 * getRandomArbitrary(0.2, 2));
 }
 
 function start() {

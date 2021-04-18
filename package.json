@@ -1,0 +1,19 @@
+{
+  "name": "3080-no-scope-alert",
+  "version": "1.0.0",
+  "description": "Telegram bot for alerts when 3080rtx are back in stock",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start":"node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.7",
+    "slimbot": "^5.1.0"
+  }
+}

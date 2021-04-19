@@ -59,7 +59,7 @@ async function runCrawler() {
 
   setTimeout(async () => {
     runCrawler();
-  }, 1e3 * 60 * getRandomArbitrary(0.2, 2));
+  }, 1e3 * 60 * getRandomArbitrary(0.2, 0.8));
 }
 
 function start() {

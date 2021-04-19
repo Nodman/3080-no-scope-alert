@@ -1,4 +1,5 @@
 const logger = require("../logger");
+const { prop } = require('../utils');
 
 const storeUrl =
   "https://www.amazon.com/stores/page/6B204EA4-AAAC-4776-82B1-D7C3BD9DDC82";
@@ -19,6 +20,11 @@ const headers = {
   "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
 };
 
+const pricePath = "buyingOptions.0.price.priceToPay.moneyValueOrRange.value.displayString";
+const inStockPath = "availability.type"
+const titlePath = "title.displayString"
+const linkPath = "links.viewOnAmazon.url"
+
 function parser(body) {
   try {
     const [, match] = body.match(dataRe) || [];
@@ -27,7 +33,7 @@ function parser(body) {
     const avaliableProducts = products.filter((product) =>
       product.buyingOptions.some(
         (option) => {
-          const stockType = option.availability.type;
+          const stockType = prop(option, inStockPath);
           const inStock = stockType !== "OUT_OF_STOCK"
           logger.log(stockType)
 
@@ -45,12 +51,12 @@ function parser(body) {
       (product) =>
         logger.log(product.buyingOptions) || {
           product: {
-            name: product.title.displayString,
-            price: "unknown",
+            name: prop(product, titlePath),
+            price: prop(product, pricePath),
           },
           store: {
             name: "Amazon",
-            link: product.links.viewOnAmazon.url,
+            link: prop(product, linkPath),
           },
         }
     );

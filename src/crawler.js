@@ -22,7 +22,7 @@ function resultsToString(results) {
   );
 }
 
-async function crawl({ storeUrl, headers, parser }) {
+async function crawl({ storeUrl, headers, parser }, slimbot) {
   logger.log(`crawling on ${storeUrl}`, 'warn', '<-');
 
   try {
@@ -46,6 +46,7 @@ async function crawl({ storeUrl, headers, parser }) {
 
     return { message: null, status: response.status };
   } catch(error) {
+    slimbot.sendMessage(process.env["TELEGRAM_ADMIN_ID"], JSON.stringify(results))
     logger.log(`Crawler error: ${error}`, 'error')
   }
 }

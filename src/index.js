@@ -44,7 +44,7 @@ async function runCrawler() {
   users = await db.user.list();
 
   if (users.length) {
-    result = await crawl(amazon);
+    result = await crawl(amazon, slimbot);
 
     if (result.status >= 500) {
       slimbot.sendMessage(adminId, "Amazon might have blocked request");

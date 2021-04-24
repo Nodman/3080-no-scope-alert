@@ -35,7 +35,7 @@ function parser(body) {
         (option) => {
           const stockType = prop(option, inStockPath);
           const inStock = stockType !== "OUT_OF_STOCK"
-          logger.log(stockType)
+          logger.log(JSON.stringify(stockType))
 
           return inStock
         }
@@ -49,7 +49,7 @@ function parser(body) {
     // TODO remove this after defining where price is
     return avaliableProducts.map(
       (product) =>
-        logger.log(product.buyingOptions) || {
+        logger.log(JSON.stringify(product.buyingOptions)) || {
           product: {
             name: prop(product, titlePath),
             price: prop(product, pricePath),
